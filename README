@@ -1,0 +1,22 @@
+There are 5 Main steps to making this project work.
+
+1."Difficulty"
+Define what makes a document "difficult." For example:
+Vocabulary complexity (e.g., uncommon words, jargon).
+Sentence length and structure (e.g., long and complex sentences).
+Readability scores (like Flesch-Kincaid).
+Amount of text or density of information.
+
+2. Extract Text from PDFs
+Use a library like PyPDF2 or pdfplumber to extract text from PDF files.
+
+3. Text Processing
+Use NLTK or spaCy for tokenization, word frequency analysis, and grammar parsing.
+Consider tools like TextStat to compute readability scores.
+
+4. Develop a Scoring Algorithm
+Combine features like readability scores, sentence complexity, and word rarity.
+Normalize these features into a 1-10 scale.
+
+5. Output Results
+Display the difficulty score and optionally include details like the metrics contributing to it.
