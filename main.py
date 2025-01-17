@@ -17,6 +17,8 @@ def extract_text_pypdf2(file_path):
 pdf_file = "data/ComplexPDF.pdf"
 text = extract_text_pypdf2(pdf_file)
 
+#Tokenize the text for the current page and return the tokenized words and sentences.
+
 def tokenize_text(text):
     words = nltk.word_tokenize(text)
     words = [word for word in words if word not in string.punctuation]
@@ -24,6 +26,8 @@ def tokenize_text(text):
     return words, sentences
 
 words, sentences = tokenize_text(text)
+
+#A filter to be rid of unnecessary words int he PDF file.
 
 def filter_stopwords(words):
     stop_words = set(stopwords.words('english'))
@@ -33,6 +37,8 @@ def filter_stopwords(words):
 
 filtered_words = filter_stopwords(words)
 
+#Finding the most common words in the PDF. Will be needed at some point maybe later.
+
 def word_frequency_analysis(words):
     frequency = Counter(words)
     return frequency.most_common(50)    
@@ -40,5 +46,4 @@ def word_frequency_analysis(words):
 common_words = word_frequency_analysis(filtered_words)
 
 print("Filtered Words:", filtered_words)
-print("Common Words:", common_words)
 
