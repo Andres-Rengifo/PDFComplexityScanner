@@ -3,9 +3,15 @@ from collections import Counter
 import nltk
 nltk.download('punkt_tab')
 nltk.download('stopwords')
-from nltk.corpus import stopwords
+nltk.download('words')
+from nltk.corpus import stopwords, words
 import string
 import re
+import textstat
+
+well_known_words = set(words.words())
+
+#Extract the PDF file
 
 def extract_text_pypdf2(file_path):
     reader = PdfReader(file_path)
@@ -36,6 +42,7 @@ def filter_stopwords(words):
     return filtered_words
 
 filtered_words = filter_stopwords(words)
+filtered_text = " ".join(filtered_words)
 
 #Finding the most common words in the PDF. Will be needed at some point maybe later.
 
@@ -45,5 +52,17 @@ def word_frequency_analysis(words):
 
 common_words = word_frequency_analysis(filtered_words)
 
-print("Filtered Words:", filtered_words)
+# Getting all the well known words, and 'difficult words' from the text.
 
+def get_well_known_words(filtered_words, well_known_words):
+    return [word for word in filtered_words if word.lower() in well_known_words]
+def get_non_well_known_words(filtered_words, well_known_words):
+    return [word for word in filtered_words if word.lower() not in well_known_words]
+
+well_known = get_well_known_words(filtered_words, well_known_words)
+non_well_known = get_non_well_known_words(filtered_words, well_known_words)
+
+print("Filtered Words:", filtered_words)
+print(textstat.difficult_words(filtered_text))
+print("well known words:", well_known)
+print("non well known words:", non_well_known)
